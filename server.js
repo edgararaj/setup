@@ -4,6 +4,7 @@ const fs = require("fs");
 const WebSocket = require("faye-websocket");
 const { spawn } = require("child_process");
 const open = require("open");
+const sass = require("sass");
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.get("/*", function (req, res) {
 const port = process.env.PORT || 5700;
 const server = app.listen(port, function () {
 	const url = `http://localhost:${port}`;
-	console.log(`Server running... ${url}`);
+	console.log(`Server running at ${url}`);
 	open(url);
 });
 
@@ -36,6 +37,14 @@ server.on("upgrade", function (req, socket, head) {
 			}, 50);
 		};
 	})();
+});
+
+sass.render({
+	file: "frontend/style.scss",
+	indentType: "tab",
+	indentWidth: 1
+}, function (err, result) {
+	fs.writeFileSync("frontend/gen/style.css", result.css.toString());
 });
 
 let preprocessor_wait = false;

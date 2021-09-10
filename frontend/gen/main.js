@@ -1,20 +1,19 @@
 function router() {
 	const routes = [
 		{ path: "/", html: `<div id="slideshow">
-	<div class="text">
-		<a href="#" class="btn style-btn">TIPOS DE ROJÃO</a>
-		<h1>Espeto de <br />Rojão</h1>
-		<p>O Espeto de Rojão é uma iguaria culinária típica de Ribeirão Grande</p>
-		<div class="arrow-icons">
-			<button class="disabled-btn">
-				<i class="fas fa-arrow-left"></i>
-			</button>
-			<button class="style-btn">
-				<i class="fas fa-arrow-right"></i>
-			</button>
+	<div>
+		<h6>Choose your style</h6>
+		<div id="gaming-pc">
+			<h3>Gaming</h3>
+			<p>Game on max settings,<br>with buttery smooth performace.</p>
+			<img src="/static/assets/gaming_pc.png"></img>
+		</div>
+		<div id="work-pc">
+			<h3>Workstation</h3>
+			<p>Slick and simple design,<br>perfect for office work.</p>
+			<img src="/static/assets/work_pc.png"></img>
 		</div>
 	</div>
-	<img src="/static/imgs/espeto.jpg" class="feature-img" />
 </div>` },
 		{ path: "/sobre-nos", html: `<section id="sobre-nos">
 	<div>

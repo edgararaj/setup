@@ -1,5 +1,5 @@
 {
-	"name": "teste1",
+	"name": "setup",
 	"version": "1.0.0",
 	"description": "",
 	"main": "server.js",
@@ -16,6 +16,7 @@
 		"open": "^8.2.1"
 	},
 	"devDependencies": {
-		"prettier": "^2.3.2"
+		"prettier": "^2.3.2",
+		"sass": "^1.39.2"
 	}
 }
