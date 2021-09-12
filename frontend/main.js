@@ -16,9 +16,13 @@ function router() {
 addEventListener("popstate", router);
 
 document.body.addEventListener("click", e => {
-	if (e.target.matches("[route]")) {
+	let target = e.target;
+	if (target.tagName != "A" && target.parentNode.tagName == "A")
+		target = target.parentNode;
+
+	if (target.matches("[route]")) {
 		e.preventDefault();
-		history.pushState(0, 0, e.target.href);
+		history.pushState(0, 0, target.href);
 		router();
 	}
 });

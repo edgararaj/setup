@@ -1,7 +1,7 @@
 :root {
-	--bg1: #000;
+	--bg1: #3a3a3a;
 	--bg2: #222;
-	--bg3: #3a3a3a;
+	--bg3: #000;
 	--fg1: #fff;
 	--fg2: #5e5e5e;
 }
@@ -24,11 +24,12 @@ header {
 	padding: 0 5%;
 	display: flex;
 	align-items: center;
+	background-color: var(--bg3);
 }
 
 #header-logo {
-	margin: 25px 0;
-	height: 50px;
+	margin: 15px 0;
+	height: 60px;
 }
 
 #sobre-nos {
@@ -109,6 +110,50 @@ header nav li a:hover {
 header .icon {
 	font-size: 30px;
 	color: var(--fg1);
+}
+
+#main {
+	text-align: center;
+	margin-top: 10vh;
+	background-color: #3a3a3a;
+}
+#main h1, #main h2, #main p {
+	color: var(--fg1);
+}
+#main h1 {
+	font-size: 2.5em;
+}
+#main #choices {
+	justify-content: center;
+	display: flex;
+	margin: 10vh auto;
+	max-width: 90%;
+}
+#main #choices > div {
+	padding: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 30px;
+	text-align: start;
+	width: 50vw;
+	margin: 0 8%;
+	background-color: var(--bg3);
+}
+#main #choices > div .text {
+	padding: 50px;
+}
+#main #choices > div h2 {
+	font-size: 2.5em;
+	font-weight: 500;
+}
+#main #choices > div p {
+	margin-top: 30px;
+	font-weight: 300;
+	font-size: 1.2em;
+}
+#main #choices > div img {
+	margin-right: -70px;
+	align-self: flex-end;
 }
 
 #slideshow {

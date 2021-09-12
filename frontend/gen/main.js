@@ -1,16 +1,20 @@
 function router() {
 	const routes = [
-		{ path: "/", html: `<div id="slideshow">
-	<div>
-		<h6>Choose your style</h6>
+		{ path: "/", html: `<div id="main">
+	<h1>What do you want it for?</h1>
+	<div id="choices">
 		<div id="gaming-pc">
-			<h3>Gaming</h3>
-			<p>Game on max settings,<br>with buttery smooth performace.</p>
+			<div class="text">
+				<h2>Gaming</h2>
+				<p>Game on max settings,<br>with buttery smooth performace.</p>
+			</div>
 			<img src="/static/assets/gaming_pc.png"></img>
 		</div>
 		<div id="work-pc">
-			<h3>Workstation</h3>
-			<p>Slick and simple design,<br>perfect for office work.</p>
+			<div class="text">
+				<h2>Work</h2>
+				<p>Slick and simple design,<br>perfect for office work.</p>
+			</div>
 			<img src="/static/assets/work_pc.png"></img>
 		</div>
 	</div>
@@ -51,9 +55,13 @@ function router() {
 addEventListener("popstate", router);
 
 document.body.addEventListener("click", e => {
-	if (e.target.matches("[route]")) {
+	let target = e.target;
+	if (target.tagName != "A" && target.parentNode.tagName == "A")
+		target = target.parentNode;
+
+	if (target.matches("[route]")) {
 		e.preventDefault();
-		history.pushState(0, 0, e.target.href);
+		history.pushState(0, 0, target.href);
 		router();
 	}
 });

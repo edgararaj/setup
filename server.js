@@ -39,41 +39,44 @@ server.on("upgrade", function (req, socket, head) {
 	})();
 });
 
-sass.render({
-	file: "frontend/style.scss",
-	indentType: "tab",
-	indentWidth: 1
-}, function (err, result) {
-	fs.writeFileSync("frontend/gen/style.css", result.css.toString());
-});
-
 let preprocessor_wait = false;
-fs.watch("frontend/", { recursive: true }, function (event_type, filename) {
+const watch_root_dir = "frontend";
+fs.watch(watch_root_dir, { recursive: true }, function (event_type, filename) {
 	if (ws_wait) return;
-	if (!filename.match(".(js|html|css)$")) return;
 	console.log(`[FSWATCH]: ${filename} was ${event_type}`);
-	// to_preprocess = ["main.js"];
-	// for (const file in to_preprocess)
-	// {
-	// 	if (filename == file) {
-	if (preprocessor_wait) return;
-	preprocessor_wait = setTimeout(function () {
-		const proc = spawn("parsa.exe", ["main.js"], { cwd: path.resolve(__dirname, "frontend/") });
-
-		proc.stdout.on("data", function (data) {
-			console.log(data.toString());
+	const last_dot = filename.lastIndexOf(".")
+	const no_ext = filename.substring(0, last_dot);
+	const is_child = filename.match("[/\\\\]");
+	if (filename.match(".(scss)$") && !is_child)
+	{
+		sass.render({
+			file: `${watch_root_dir}/${filename}`,
+			indentType: "tab",
+			indentWidth: 1
+		}, function (err, result) {
+			if (!err)
+				fs.writeFileSync(`${watch_root_dir}/gen/${no_ext}.css`, result.css.toString());
 		});
+	}
+	else if (filename.match(".(js|html)$") && !is_child) {
+		if (preprocessor_wait) return;
+		preprocessor_wait = setTimeout(function () {
+			const proc = spawn("parsa.exe", ["main.js"], { cwd: path.resolve(__dirname, "frontend/") });
 
-		proc.on("close", function (code) {
-			console.log(`Exited with code ${code}`);
-			preprocessor_wait = false;
-			if (!code) if (ws) ws.send("reload");
-		});
-	}, 150);
-	return;
-	// }
-	// }
-	if (ws) ws.send("reload");
+			proc.stdout.on("data", function (data) {
+				console.log(data.toString());
+			});
+
+			proc.on("close", function (code) {
+				console.log(`Exited with code ${code}`);
+				preprocessor_wait = false;
+				if (!code) if (ws) ws.send("reload");
+			});
+		}, 150);
+	}
+	else if (filename.match(".(css)$")){
+		if (ws) ws.send("reload");
+	}
 });
 
 process.on("SIGINT", function () {
