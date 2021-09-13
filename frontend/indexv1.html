@@ -8,7 +8,6 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 		<link rel="stylesheet" href="/static/heavy_heap/stylesheet.css" />
 		<link rel="stylesheet" href="/static/graphik/stylesheet.css" />
-		<link rel="stylesheet" href="/static/nasalization/stylesheet.css" />
 		<script type="module" src="/static/gen/main.js"></script>
 		<script type="module" src="/static/burger-menu.js"></script>
 		<script type="module" src="/static/burger-menu.js"></script>
@@ -16,30 +15,20 @@
 	</head>
 	<body>
 		<header>
-			<div class="content">
-				<a href="/" route>
-					<img src="/static/assets2/header_logo.png" id="header-logo" />
-				</a>
-				<nav>
-					<ul>
-						<li><a href="/computadores" class="btn" route>Computadores</a></li>
-						<li><a href="/montagem" class="btn" route>Desenha o teu PC</a></li>
-					</ul>
-				</nav>
-				<form id="search-bar">
-					<button><i class="fa fa-search"></i></button>
-					<input type="search" placeholder="Procure alguma coisa...">
-				</form>
-				<button id="profile" class="btn">
-					<i class="fas fa-user"></i>
-				</button>
-				<div id="burger-icon">
-					<div class="line1"></div>
-					<div class="line2"></div>
-					<div class="line3"></div>
-				</div>
-			</div>
-			<div id="header-line">
+			<a href="/" route>
+				<img src="/static/assets/header_logo.png" id="header-logo" />
+			</a>
+			<nav>
+				<ul>
+					<li><a href="/busca" class="btn" route>Busca</a></li>
+					<li><a href="/montagem" class="btn" route>Montagem</a></li>
+					<li><a href="/sobre-nos" class="btn" route>Sobre nós</a></li>
+				</ul>
+			</nav>
+			<div id="burger-icon">
+				<div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
 			</div>
 		</header>
 		<div id="content"></div>

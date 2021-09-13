@@ -1,9 +1,10 @@
 :root {
-	--bg1: #3a3a3a;
-	--bg2: #222;
-	--bg3: #000;
+	--bg1: #000;
+	--bg2: #000;
+	--bg3: #333;
 	--fg1: #fff;
-	--fg2: #5e5e5e;
+	--fg2: #858585;
+	--fg3: #c900ff;
 }
 
 * {
@@ -20,16 +21,89 @@ body {
 	background-color: var(--bg1);
 }
 
-header {
-	padding: 0 5%;
+.btn {
+	all: unset;
+	cursor: pointer;
+	padding: 10px 20px;
+}
+
+header .content {
+	font-family: "nasalization";
+	padding: 0 12%;
 	display: flex;
 	align-items: center;
 	background-color: var(--bg3);
 }
+header .content li {
+	font-size: 1.1em;
+}
+header .content li:hover {
+	transition: all 130ms ease-in-out;
+	transform: translateY(-3px);
+}
+header .btn {
+	color: var(--fg1);
+}
+header .btn:hover {
+	transition: all 130ms ease-in-out;
+	transform: translateY(-3px);
+	color: var(--fg3);
+	filter: brightness(1.5);
+}
+header #profile {
+	font-size: 25px;
+	margin-left: 50px;
+}
+header #header-logo {
+	margin: 18px 0;
+}
+header #search-bar {
+	font-family: "graphik";
+	background-color: var(--fg2);
+	border-radius: 5px;
+	width: 25%;
+}
+header #search-bar input {
+	all: unset;
+	color: var(--fg1);
+}
+header #search-bar ::placeholder {
+	width: 100%;
+	color: var(--fg1);
+}
+header #search-bar button {
+	all: unset;
+	transform: scaleX(-1);
+	border-radius: 5px;
+	padding: 8px 10px;
+	height: 100%;
+	color: var(--fg1);
+}
+header #search-bar button:hover {
+	background-color: var(--bg2);
+}
+header #header-line {
+	height: 10px;
+	background-color: var(--fg3);
+}
 
-#header-logo {
-	margin: 15px 0;
-	height: 60px;
+header nav {
+	z-index: 1;
+	flex: 1;
+	margin-left: 60px;
+}
+
+header nav li {
+	display: inline-block;
+}
+
+header nav li:not(:last-child) {
+	margin-right: 10px;
+}
+
+header .icon {
+	font-size: 30px;
+	color: var(--fg1);
 }
 
 #sobre-nos {
@@ -84,40 +158,14 @@ header {
 	visibility: hidden;
 }
 
-header nav {
-	z-index: 1;
-	flex: 1;
-	margin-left: 60px;
-}
-
-header nav li {
-	display: inline-block;
-}
-
-header nav li:not(:last-child) {
-	margin-right: 10px;
-}
-
-header nav li a {
-	color: var(--fg1);
-}
-
-header nav li a:hover {
-	background: var(--bg2);
-	color: var(--fg1);
-}
-
-header .icon {
-	font-size: 30px;
-	color: var(--fg1);
-}
-
 #main {
 	text-align: center;
 	margin-top: 10vh;
-	background-color: #3a3a3a;
+	background-color: #000;
 }
-#main h1, #main h2, #main p {
+#main h1,
+#main h2,
+#main p {
 	color: var(--fg1);
 }
 #main h1 {
@@ -216,11 +264,6 @@ header .icon {
 	width: 45px;
 	height: 45px;
 	border-radius: 50%;
-}
-
-.btn {
-	border-radius: 6px;
-	padding: 10px 20px;
 }
 
 .style-btn {
