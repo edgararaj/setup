@@ -12,7 +12,7 @@ app.use("/static", express.static(path.resolve("frontend")));
 
 app.get("/*", function (req, res) {
 	res.sendFile(path.resolve("frontend", "index.html"));
-});
+})
 
 const port = process.env.PORT || 5700;
 const server = app.listen(port, function () {
@@ -31,7 +31,6 @@ server.on("upgrade", function (req, socket, head) {
 		let args = arguments;
 		if (ws_wait) clearTimeout(ws_wait);
 		ws_wait = setTimeout(function () {
-			console.log("[WEBSOCKET]: Sending reload");
 			wssend.apply(ws, args);
 			ws_wait = false;
 		}, 100);
@@ -40,12 +39,13 @@ server.on("upgrade", function (req, socket, head) {
 
 let preprocessor_wait;
 const watch_root_dir = "frontend";
-fs.watch(watch_root_dir, { recursive: true }, function (event_type, filename) {
+fs.watch(watch_root_dir, {recursive: true}, function (event_type, filename) {
 	console.log(`[FSWATCH]: ${filename} was ${event_type}`);
-
 	const files_to_preprocess = ["main.js"];
-	const to_preprocess = files_to_preprocess.filter(file => filename == file);
-	if (to_preprocess.length || filename.match(".(html)$")) {
+	const to_preprocess = files_to_preprocess.filter(file => filename.match(file));
+	console.log(to_preprocess);
+	if (to_preprocess.length || filename.match(".(html)$"))
+	{
 		if (preprocessor_wait) clearTimeout(preprocessor_wait);
 		preprocessor_wait = setTimeout(function () {
 			const proc = spawn("parsa.exe", to_preprocess, { cwd: watch_root_dir });
@@ -59,18 +59,21 @@ fs.watch(watch_root_dir, { recursive: true }, function (event_type, filename) {
 				preprocessor_wait = false;
 				if (!code && ws) ws.send("reload");
 			});
-		}, 100);
-	} else if (filename.match(".(scss)$")) {
+		}, 150);
+		return;
+	}
+	if (filename.match(".(scss)$"))
+	{
 		const no_ext = filename.substring(0, filename.lastIndexOf("."));
-		sass.render(
-			{
-				file: `${watch_root_dir}/${filename}`,
-				indentType: "tab",
-				indentWidth: 1,
-			},
-			function (err, result) {
-				if (!err) fs.writeFileSync(`${watch_root_dir}/gen/${no_ext}.css`, result.css.toString());
-			}
-		);
-	} else if (filename.match(".(css)$") && ws) ws.send("reload");
+		sass.render({
+			file: `${watch_root_dir}/${filename}`,
+			indentType: "tab",
+			indentWidth: 1
+		}, function (err, result) {
+			if (!err)
+				fs.writeFileSync(`${watch_root_dir}/gen/${no_ext}.css`, result.css.toString());
+		});
+		return;
+	}
+	if (ws) ws.send("reload");
 });
