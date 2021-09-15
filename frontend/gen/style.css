@@ -21,7 +21,7 @@ body {
 	background-color: var(--bg1);
 }
 
-.btn {
+.button {
 	all: unset;
 	cursor: pointer;
 	padding: 10px 20px;
@@ -34,124 +34,67 @@ header .content {
 	align-items: center;
 	background-color: var(--bg3);
 }
-header .content li {
-	font-size: 1.1em;
-}
-header .content li:hover {
-	transition: all 130ms ease-in-out;
-	transform: translateY(-3px);
-}
-header .btn {
+header .button {
 	color: var(--fg1);
 }
-header .btn:hover {
+header .button:hover {
 	transition: all 130ms ease-in-out;
 	transform: translateY(-3px);
 	color: var(--fg3);
 	filter: brightness(1.5);
 }
-header #profile {
-	font-size: 25px;
+header .icon {
+	color: var(--fg1);
+	font-size: 20px;
 	margin-left: 50px;
 }
-header #header-logo {
-	margin: 18px 0;
+header .logo {
+	margin: 8px 0;
+	height: 48px;
 }
-header #search-bar {
+header .search-bar {
 	font-family: "graphik";
 	background-color: var(--fg2);
 	border-radius: 5px;
-	width: 25%;
+	flex: 1;
 }
-header #search-bar input {
+header .search-bar input {
 	all: unset;
 	color: var(--fg1);
 }
-header #search-bar ::placeholder {
+header .search-bar ::placeholder {
 	width: 100%;
 	color: var(--fg1);
 }
-header #search-bar button {
+header .search-bar button {
 	all: unset;
 	transform: scaleX(-1);
 	border-radius: 5px;
-	padding: 8px 10px;
+	padding: 5px 8px;
 	height: 100%;
 	color: var(--fg1);
+	font-size: 1.2em;
 }
-header #search-bar button:hover {
+header .search-bar button:hover {
 	background-color: var(--bg2);
 }
-header #header-line {
+header .line {
 	height: 10px;
 	background-color: var(--fg3);
 }
-
 header nav {
 	z-index: 1;
-	flex: 1;
-	margin-left: 60px;
+	margin: 0 50px;
 }
-
 header nav li {
 	display: inline-block;
 }
-
+header nav li:hover {
+	transition: all 130ms ease-in-out;
+	transform: translateY(-3px);
+}
 header nav li:not(:last-child) {
 	margin-right: 10px;
-}
-
-header .icon {
-	font-size: 30px;
-	color: var(--fg1);
-}
-
-#sobre-nos {
-	margin: 40px 70px 0 70px;
-}
-
-#sobre-nos div {
-	display: flex;
-	align-items: center;
-}
-
-#sobre-nos div:not(:last-child) {
-	margin-bottom: 100px;
-}
-
-#sobre-nos div:nth-child(even) {
-	justify-content: flex-end;
-}
-
-#sobre-nos .text {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-#sobre-nos div:nth-child(even) .text {
-	align-items: flex-end;
-	text-align: right;
-}
-
-#sobre-nos img {
-	width: 40%;
-	height: 100%;
-	margin-right: 50px;
-}
-
-#sobre-nos div:nth-child(even) img {
-	margin-right: 0;
-	margin-left: 50px;
-}
-
-#sobre-nos p {
-	color: var(--fg1);
-}
-
-#sobre-nos h2 {
-	color: var(--fg1);
-	margin-bottom: 20px;
 }
 
 #burger-icon {
@@ -171,13 +114,13 @@ header .icon {
 #main h1 {
 	font-size: 2.5em;
 }
-#main #choices {
+#main .choices {
 	justify-content: center;
 	display: flex;
 	margin: 10vh auto;
 	max-width: 90%;
 }
-#main #choices > div {
+#main .choices > div {
 	padding: 20px 0;
 	display: flex;
 	justify-content: space-between;
@@ -187,96 +130,23 @@ header .icon {
 	margin: 0 8%;
 	background-color: var(--bg3);
 }
-#main #choices > div .text {
+#main .choices > div .text {
 	padding: 50px;
 }
-#main #choices > div h2 {
+#main .choices > div h2 {
 	font-size: 2.5em;
 	font-weight: 500;
 }
-#main #choices > div p {
+#main .choices > div p {
 	margin-top: 30px;
 	font-weight: 300;
 	font-size: 1.2em;
 }
-#main #choices > div img {
+#main .choices > div img {
 	margin-right: -70px;
 	align-self: flex-end;
 }
 
-#slideshow {
-	display: flex;
-	align-items: center;
-	position: absolute;
-	inset: 0;
-	margin: auto 0 auto 15%;
-}
-
-#slideshow h1 {
-	font-size: 60px;
-	font-weight: lighter;
-	margin: 24px 0 15px;
-	color: var(--fg1);
-}
-
-#slideshow p {
-	font-size: 20px;
-	color: var(--fg2);
-}
-
-#slideshow .style-btn {
-	display: inline-block;
-	font-weight: 600;
-	font-size: 13px;
-}
-
-#slideshow .text {
-	z-index: 1;
-}
-
-#slideshow .feature-img {
-	position: absolute;
-	right: 0;
-	width: 60%;
-	-webkit-mask-image: linear-gradient(90deg, transparent, black);
-	mask-image: linear-gradient(90deg, transparent, black);
-}
-
-.arrow-icons {
-	margin-top: 40px;
-}
-
-.arrow-icons i {
-	font-size: 20px;
-}
-
-.arrow-icons button {
-	margin-right: 25px;
-	background-color: transparent;
-	border: none;
-}
-
-.arrow-icons .disabled-btn {
-	color: var(--fg2);
-}
-
-.arrow-icons .style-btn {
-	width: 45px;
-	height: 45px;
-	border-radius: 50%;
-}
-
-.style-btn {
-	color: var(--bg1);
-	background: linear-gradient(135deg, var(--bg2), var(--fg1));
-	box-shadow: 3px 8px 22px #1c1c1cee;
-}
-
-@media (max-width: 1200px) {
-	#social-links {
-		display: none;
-	}
-}
 @media (max-width: 600px) {
 	#burger-icon {
 		width: 27px;
@@ -316,11 +186,9 @@ header .icon {
 		flex-direction: column;
 		overflow-x: hidden;
 	}
-
 	header .icon {
 		display: none;
 	}
-
 	header nav {
 		margin: 0;
 		background-color: var(--bg3);
@@ -329,18 +197,15 @@ header .icon {
 		transition: transform 130ms ease-in-out;
 		border-bottom: 1px solid #ffffff;
 	}
-
 	header nav.nav-open {
 		transform: scale(1, 1);
 	}
-
 	header nav li {
 		text-align: center;
 		width: 100vw;
 		margin: 0 !important;
 		border-top: 1px solid #ffffff;
 	}
-
 	header nav li a {
 		display: block;
 		padding: 15px 0 !important;
