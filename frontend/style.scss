@@ -43,7 +43,7 @@ header {
 		&:hover {
 			transition: all 130ms ease-in-out;
 			transform: translateY(-3px);
-			// text-shadow: 0 2px 0 var(--fg3);
+			text-shadow: 3px 3px 4px var(--bg1);
 			color: var(--fg3);
 			filter: brightness(1.5);
 		}
