@@ -35,6 +35,23 @@ header {
 		display: flex;
 		align-items: center;
 		background-color: var(--bg3);
+
+		nav {
+			z-index: 1;
+			margin: 0 50px;
+
+			li {
+				display: inline-block;
+				&:hover {
+					transition: all 130ms ease-in-out;
+					transform: translateY(-3px);
+				}
+
+				&:not(:last-child) {
+					margin-right: 10px;
+				}
+			}
+		}
 	}
 
 	.button {
@@ -95,27 +112,10 @@ header {
 		height: 10px;
 		background-color: var(--fg3);
 	}
-
-	nav {
-		z-index: 1;
-		margin: 0 50px;
-
-		li {
-			display: inline-block;
-			&:hover {
-				transition: all 130ms ease-in-out;
-				transform: translateY(-3px);
-			}
-
-			&:not(:last-child) {
-				margin-right: 10px;
-			}
-		}
-	}
 }
 
 #burger-icon {
-	visibility: hidden;
+	display: none;
 }
 
 #main {
@@ -175,13 +175,12 @@ header {
 		width: 27px;
 		height: 22px;
 		position: absolute;
-		top: 38px;
+		top: 24px;
 		left: 5%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		cursor: pointer;
-		visibility: visible;
 	}
 
 	#burger-icon div {
@@ -206,37 +205,36 @@ header {
 	}
 
 	header {
-		flex-direction: column;
-		overflow-x: hidden;
+		.content {
+			flex-direction: column;
 
-		.icon {
-			display: none;
-		}
+			nav {
+				background-color: var(--bg3);
+				transform: scale(1, 0);
+				transform-origin: top;
+				transition: transform 130ms ease-in-out;
+				border-bottom: 1px solid #ffffff;
 
-		nav {
-			margin: 0;
-			background-color: var(--bg3);
-			transform: scale(1, 0);
-			transform-origin: top;
-			transition: transform 130ms ease-in-out;
-			border-bottom: 1px solid #ffffff;
+				&.nav-open {
+					transform: scale(1, 1);
+				}
 
-			&.nav-open {
-				transform: scale(1, 1);
-			}
+				li {
+					text-align: center;
+					width: 100vw;
+					border-top: 1px solid #ffffff;
 
-			li {
-				text-align: center;
-				width: 100vw;
-				margin: 0 !important;
-				border-top: 1px solid #ffffff;
-
-				a {
-					display: block;
-					padding: 15px 0 !important;
-					opacity: 0;
+					a {
+						display: block;
+						opacity: 0;
+					}
 				}
 			}
+		}
+
+		.icon,
+		.search-bar {
+			display: none;
 		}
 	}
 

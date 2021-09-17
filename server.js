@@ -42,7 +42,7 @@ fs.watch(watch_root_dir, { recursive: true }, function (event_type, filename) {
 		const files_to_preprocess = ["main.js"];
 		const to_preprocess = files_to_preprocess.filter(file => filename == file);
 		if (to_preprocess.length || filename.match(".(html)$")) {
-			const proc = spawn("parsa.exe", to_preprocess, { cwd: watch_root_dir });
+			const proc = spawn("parsa.exe", files_to_preprocess, { cwd: watch_root_dir });
 
 			proc.stdout.on("data", function (data) {
 				console.log(data.toString());
