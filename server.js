@@ -2,9 +2,32 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const WebSocket = require("faye-websocket");
-const { spawn } = require("child_process");
+const { spawn, spawnSync } = require("child_process");
 const open = require("open");
 const sass = require("sass");
+
+function parsa(to_preprocess)
+{
+	const proc = spawnSync("parsa.exe", to_preprocess, {cwd: "frontend"});
+	console.log(proc.stdout.toString());
+	console.log(`Exited with code ${proc.status}`);
+	if (!proc.status && ws) ws.send("reload");
+}
+
+function sass_render(filenames)
+{
+	filenames.forEach(filename => {
+		const no_ext = filename.substring(0, filename.lastIndexOf("."));
+		const result = sass.renderSync(
+			{
+				file: `frontend/${filename}`,
+				indentType: "tab",
+				indentWidth: 1,
+			}
+		);
+		fs.writeFileSync(`frontend/gen/${no_ext}.css`, result.css.toString());
+	});
+}
 
 const app = express();
 
@@ -16,6 +39,9 @@ app.get("/*", function (req, res) {
 
 const port = process.env.PORT || 5700;
 const server = app.listen(port, function () {
+	console.log("Compiling website...");
+	parsa(["main.js"]);
+	sass_render(["style.scss"]);
 	const url = `http://localhost:${port}`;
 	console.log(`Server running at ${url}`);
 	open(url);
@@ -33,8 +59,7 @@ server.on("upgrade", function (req, socket, head) {
 });
 
 let watch_wait;
-const watch_root_dir = "frontend";
-fs.watch(watch_root_dir, { recursive: true }, function (event_type, filename) {
+fs.watch("frontend", { recursive: true }, function (event_type, filename) {
 	if (watch_wait) clearTimeout(watch_wait);
 	watch_wait = setTimeout(function () {
 		console.log(`[FSWATCH]: ${filename} was ${event_type}`);
@@ -42,28 +67,9 @@ fs.watch(watch_root_dir, { recursive: true }, function (event_type, filename) {
 		const files_to_preprocess = ["main.js"];
 		const to_preprocess = files_to_preprocess.filter(file => filename == file);
 		if (to_preprocess.length || filename.match(".(html)$")) {
-			const proc = spawn("parsa.exe", files_to_preprocess, { cwd: watch_root_dir });
-
-			proc.stdout.on("data", function (data) {
-				console.log(data.toString());
-			});
-
-			proc.on("close", function (code) {
-				console.log(`Exited with code ${code}`);
-				if (!code && ws) ws.send("reload");
-			});
+			parsa(to_preprocess);
 		} else if (filename.match(".(scss)$")) {
-			const no_ext = filename.substring(0, filename.lastIndexOf("."));
-			sass.render(
-				{
-					file: `${watch_root_dir}/${filename}`,
-					indentType: "tab",
-					indentWidth: 1,
-				},
-				function (err, result) {
-					if (!err) fs.writeFileSync(`${watch_root_dir}/gen/${no_ext}.css`, result.css.toString());
-				}
-			);
+			sass_render([filename]);
 		} else if (filename.match(".(css)$") && ws) ws.send("reload");
 	}, 100);
 });

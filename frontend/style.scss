@@ -78,10 +78,14 @@ header {
 	}
 
 	.search-bar {
-		font-family: "graphik";
-		background-color: var(--fg2);
-		border-radius: 5px;
 		flex: 1;
+		form {
+			margin: 0 auto;
+			width: 400px;
+			font-family: "graphik";
+			background-color: var(--fg2);
+			border-radius: 5px;
+		}
 
 		input {
 			all: unset;

@@ -68,10 +68,14 @@ header .logo {
 	height: 48px;
 }
 header .search-bar {
+	flex: 1;
+}
+header .search-bar form {
+	margin: 0 auto;
+	width: 400px;
 	font-family: "graphik";
 	background-color: var(--fg2);
 	border-radius: 5px;
-	flex: 1;
 }
 header .search-bar input {
 	all: unset;

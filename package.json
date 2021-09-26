@@ -13,10 +13,10 @@
 	"dependencies": {
 		"express": "^4.17.1",
 		"faye-websocket": "^0.11.4",
-		"open": "^8.2.1"
+		"open": "^8.2.1",
+		"sass": "^1.39.2"
 	},
 	"devDependencies": {
-		"prettier": "^2.3.2",
-		"sass": "^1.39.2"
+		"prettier": "^2.3.2"
 	}
 }

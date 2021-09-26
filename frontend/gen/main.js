@@ -1,4 +1,4 @@
-function router() {
+function router(pathname) {
 	const routes = [
 		{ path: "/", html: `<div id="main">
 	<h1>What do you want it for?</h1>
@@ -19,7 +19,7 @@ function router() {
 		</div>
 	</div>
 </div>` },
-		{ path: "/sobre-nos", html: `<section id="sobre-nos">
+		{ path: "/computadores", html: `<section id="sobre-nos">
 	<div>
 		<img src="/static/assets/edgar.jpg"></img>
 		<div class="text">
@@ -42,12 +42,9 @@ function router() {
 	</div>
 </section>` },
 	];
-	let route_matched = routes.find(route => route.path == location.pathname);
-	if (!route_matched) {
-		route_matched = routes[0];
-		history.replaceState(0, 0, route_matched.path);
-	}
-
+	pathname = (!pathname || pathname.type == "popstate") ? location.pathname : pathname;
+	let route_matched = routes.find(route => route.path == pathname);
+	if (pathname != location.pathname) history.pushState(0, 0, route_matched.path);
 	const content = document.getElementById("content");
 	content.innerHTML = route_matched.html;
 }
@@ -61,8 +58,7 @@ document.body.addEventListener("click", e => {
 
 	if (target.matches("[route]")) {
 		e.preventDefault();
-		history.pushState(0, 0, target.href);
-		router();
+		router(target.pathname);
 	}
 });
 
