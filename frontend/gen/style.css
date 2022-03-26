@@ -31,6 +31,7 @@ header .content {
 	font-family: "nasalization";
 	padding: 0 12%;
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	background-color: var(--bg3);
 }
@@ -58,10 +59,15 @@ header .button:hover {
 	color: var(--fg3);
 	filter: brightness(1.5);
 }
-header .icon {
+header .icons {
+	margin-left: 10px;
+}
+header .icons .icon {
 	color: var(--fg1);
 	font-size: 20px;
-	margin-left: 50px;
+}
+header .icons .icon:not(:last-child) {
+	margin-left: 5px;
 }
 header .logo {
 	margin: 8px 0;
@@ -71,8 +77,7 @@ header .search-bar {
 	flex: 1;
 }
 header .search-bar form {
-	margin: 0 auto;
-	width: 400px;
+	margin: 0 10%;
 	font-family: "graphik";
 	background-color: var(--fg2);
 	border-radius: 5px;
@@ -152,11 +157,11 @@ header .line {
 	align-self: flex-end;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 	#burger-icon {
+		margin-right: 100px;
 		width: 27px;
 		height: 22px;
-		position: absolute;
 		top: 24px;
 		left: 5%;
 		display: flex;
@@ -187,29 +192,10 @@ header .line {
 	}
 
 	header .content {
-		flex-direction: column;
+		padding: 0 5%;
 	}
-	header .content nav {
-		background-color: var(--bg3);
-		transform: scale(1, 0);
-		transform-origin: top;
-		transition: transform 130ms ease-in-out;
-		border-bottom: 1px solid #ffffff;
-	}
-	header .content nav.nav-open {
-		transform: scale(1, 1);
-	}
-	header .content nav li {
-		text-align: center;
-		width: 100vw;
-		border-top: 1px solid #ffffff;
-	}
-	header .content nav li a {
-		display: block;
-		opacity: 0;
-	}
-	header .icon,
-header .search-bar {
+	header .content .search-bar,
+header .content nav {
 		display: none;
 	}
 
